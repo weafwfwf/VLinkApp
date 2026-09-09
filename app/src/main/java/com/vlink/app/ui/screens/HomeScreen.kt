@@ -1,5 +1,6 @@
 package com.vlink.app.ui.screens
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -19,6 +20,7 @@ import com.vlink.app.data.model.ConfigProfile
  * combined), each with a per-row ping button and result, plus a
  * "ping all" action and a connect toggle per selected server.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     configs: List<ConfigProfile>,
@@ -69,7 +71,7 @@ fun HomeScreen(
                             onSelect = { onSelectConfig(config) },
                             onPing = { onPingOne(config) }
                         )
-                        Divider()
+                        HorizontalDivider()
                     }
                 }
             }
@@ -96,7 +98,7 @@ private fun ConfigRow(
                 }
             }
         },
-        modifier = Modifier.clickable(onSelect)
+        modifier = Modifier.clickable(onClick = onSelect)
     )
 }
 
@@ -111,7 +113,3 @@ private fun PingBadge(ms: Long?) {
     }
     Text(label, color = color, modifier = Modifier.padding(end = 8.dp))
 }
-
-// small helper so ListItem can take a plain onClick without importing clickable everywhere
-private fun Modifier.clickable(onClick: () -> Unit): Modifier =
-    this.then(androidx.compose.foundation.clickable(onClick = onClick))
