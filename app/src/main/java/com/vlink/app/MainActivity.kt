@@ -51,7 +51,7 @@ class MainActivity : ComponentActivity() {
                 ) { result ->
                     if (result.resultCode == RESULT_OK) {
                         vm.selectedConfigId?.let { startVpnService(it) }
-                        vm.setConnected(true)
+                        vm.markConnected(true)
                     }
                 }
 
@@ -62,13 +62,13 @@ class MainActivity : ComponentActivity() {
                     } else {
                         // Already granted previously.
                         vm.selectedConfigId?.let { startVpnService(it) }
-                        vm.setConnected(true)
+                        vm.markConnected(true)
                     }
                 }
 
                 fun disconnect() {
                     stopVpnService()
-                    vm.setConnected(false)
+                    vm.markConnected(false)
                 }
 
                 NavHost(navController, startDestination = "home") {
@@ -145,7 +145,7 @@ class VLinkViewModel(private val repository: VLinkRepository) : ViewModel() {
 
     /** Called by the Activity once the VpnService has actually been
      *  started/stopped, so UI state reflects reality rather than intent. */
-    fun setConnected(value: Boolean) { isConnected = value }
+    fun markConnected(value: Boolean) { isConnected = value }
 
     fun pingOne(config: ConfigProfile) = viewModelScope.launch { repository.pingConfig(config) }
 
