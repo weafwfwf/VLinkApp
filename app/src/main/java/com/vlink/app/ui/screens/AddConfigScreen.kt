@@ -21,6 +21,7 @@ import com.journeyapps.barcodescanner.ScanOptions
  * the clipboard. Calls [onLinkReady] once a non-blank link is captured;
  * the caller (ViewModel) is responsible for parsing/saving it.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddConfigScreen(
     onLinkReady: (String) -> Unit,

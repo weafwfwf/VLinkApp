@@ -17,6 +17,7 @@ import com.vlink.app.data.model.Subscription
  * field), refresh individually, or remove. This is the "قابلیت اضافه کردن
  * چند ساب همزمان" piece.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SubscriptionScreen(
     subscriptions: List<Subscription>,
@@ -53,7 +54,7 @@ fun SubscriptionScreen(
             ) { Text("افزودن ساب") }
 
             Spacer(Modifier.height(16.dp))
-            Divider()
+            HorizontalDivider()
 
             LazyColumn {
                 items(subscriptions, key = { it.id }) { sub ->
@@ -71,7 +72,7 @@ fun SubscriptionScreen(
                             }
                         }
                     )
-                    Divider()
+                    HorizontalDivider()
                 }
             }
         }
